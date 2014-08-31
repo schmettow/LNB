@@ -1,24 +1,32 @@
 \name{dlogitnorm}
 \alias{dlogitnorm}
-%- Also NEED an '\alias' for EACH other topic documented here.
+\alias{rlogitnorm}
+\alias{mean.logitnorm}
+\alias{var.logitnorm}
+
 \title{
-%%  ~~function to do ... ~~
+logit-normal distribution
 }
 \description{
-%%  ~~ A concise (1-5 lines) description of what the function does. ~~
+distribution functions for the logit-normal distribution
 }
 \usage{
 dlogitnorm(x, m, s)
+rlogitnorm(r, x, m, s)
+mean.logitnorm(m, s)
+var.logitnorm(m, s)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{x}{
-%%     ~~Describe \code{x} here~~
+  quantile
 }
   \item{m}{
+  mean
 %%     ~~Describe \code{m} here~~
 }
   \item{s}{
+  standard deviation
 %%     ~~Describe \code{s} here~~
 }
 }

@@ -1,42 +1,45 @@
 \name{dlngeom}
 \alias{dlngeom}
-%- Also NEED an '\alias' for EACH other topic documented here.
+\alias{plngeom}
+\alias{hlngeom}
 \title{
-%%  ~~function to do ... ~~
+logit-normal geometric distribution
 }
 \description{
-%%  ~~ A concise (1-5 lines) description of what the function does. ~~
+distribution functions (probability, quantile and hazard) for the logit-normal geometric distribution
 }
 \usage{
-dlngeom(k, m, s)
+dlngeom(x, size, m, s)
+plngeom(x, size, m, s)
+qlngeom(q, size, m, s)
+hlngeom(x, size, m, s)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
-  \item{k}{
-%%     ~~Describe \code{k} here~~
+  \item{x, q}{
+vector of random variable realizations or quantiles
+}
+  \item{size}{
+number of trials (zero or more)
 }
   \item{m}{
-%%     ~~Describe \code{m} here~~
+distribution parameter (central tendency)
 }
   \item{s}{
-%%     ~~Describe \code{s} here~~
+distribution parameter (dispersion)
 }
 }
 \details{
-%%  ~~ If necessary, more details than the description above ~~
+The logit-normal geometric is created by imposing a logit-normal prior on the parameter p of the geometric distribution.
 }
 \value{
-%%  ~Describe the value returned
-%%  If it is a LIST, use
-%%  \item{comp1 }{Description of 'comp1'}
-%%  \item{comp2 }{Description of 'comp2'}
-%% ...
+probability (dlngeom), cumulative probabilty (qlngeom), quantile (qlngeom) or hazard rate (hlngeom)
 }
 \references{
-%% ~put references to the literature/web site here ~
+Schmettow, M. (2009). Controlling the usability evaluation process under varying defect visibility. In BCS-HCI ’09: Proceedings of the 23rd British HCI Group Annual Conference on People and Computers: Celebrating People and Technology (pp. 188–197). Swinton, UK: British Computer Society.
 }
 \author{
-%%  ~~who you are~~
+Martin Schmettow
 }
 \note{
 %%  ~~further notes~~
@@ -45,23 +48,13 @@ dlngeom(k, m, s)
 %% ~Make other sections like Warning with \section{Warning }{....} ~
 
 \seealso{
-%% ~~objects to See Also as \code{\link{help}}, ~~~
+dlnbinom
+dlnbinom.zt
+dgeom
 }
 \examples{
-##---- Should be DIRECTLY executable !! ----
-##-- ==>  Define data, use random,
-##--	or do  help(data=index)  for the standard data sets.
-
-## The function is currently defined as
-function (k, m, s) 
-{
-    f <- function(P, k, m, s) dgeom(k, P) * dlogitnorm(P, m, 
-        s)
-    F <- function(k, m, s) integrate(f, 0, 1, k, m, s)$value
-    mapply(F, k, m, s)
+  dlngeom(3, 10, 0.5, 2)
+  qlngeom(3, 10, 0.5, 2)
   }
-}
-% Add one or more standard keywords, see file 'KEYWORDS' in the
-% R documentation directory.
-\keyword{ ~kwd1 }
-\keyword{ ~kwd2 }% __ONLY ONE__ keyword per line
+  
+  

@@ -1,45 +1,41 @@
 \name{dlnbinom.zt}
-\alias{dlnbinom.zt}
-%- Also NEED an '\alias' for EACH other topic documented here.
+\alias{dlnbinom.zot}
 \title{
-%%  ~~function to do ... ~~
+zero-truncated logit-normal binomial distribution
 }
 \description{
-%%  ~~ A concise (1-5 lines) description of what the function does. ~~
+distribution functions (probability, random number generation and cumulative) for the tzero-ztruncated and zero-one trauncated logit-normal binomial distribution
 }
 \usage{
 dlnbinom.zt(x, size, m, s)
+dlnbinom.zot(x, size, m, s)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{x}{
-%%     ~~Describe \code{x} here~~
+vector of quantiles
 }
   \item{size}{
-%%     ~~Describe \code{size} here~~
+number of trials (zero or more)
 }
   \item{m}{
-%%     ~~Describe \code{m} here~~
+distribution parameter (central tendency)
 }
   \item{s}{
-%%     ~~Describe \code{s} here~~
+distribution parameter (dispersion)
 }
 }
 \details{
-%%  ~~ If necessary, more details than the description above ~~
+The logit-normal distribution is created by imposing a logit-normal prior on the binomial parameter p. The zero-truncated LNB is derived by restricting the random variable to a strictly positive range and re-scaling the probability mass accordingly. The zero-one truncated distribution is created respectively.
 }
 \value{
-%%  ~Describe the value returned
-%%  If it is a LIST, use
-%%  \item{comp1 }{Description of 'comp1'}
-%%  \item{comp2 }{Description of 'comp2'}
-%% ...
+dlnbinom.zt gives zero-truncated probability, dlnbinom.zt returns the zero-one trauncated probability
 }
 \references{
-%% ~put references to the literature/web site here ~
+Schmettow, M. (2009). Controlling the usability evaluation process under varying defect visibility. In BCS-HCI ’09: Proceedings of the 23rd British HCI Group Annual Conference on People and Computers: Celebrating People and Technology (pp. 188–197). Swinton, UK: British Computer Society.
 }
 \author{
-%%  ~~who you are~~
+Martin Schmettow
 }
 \note{
 %%  ~~further notes~~
@@ -48,21 +44,10 @@ dlnbinom.zt(x, size, m, s)
 %% ~Make other sections like Warning with \section{Warning }{....} ~
 
 \seealso{
-%% ~~objects to See Also as \code{\link{help}}, ~~~
+dlnbinom
+dlngeom
 }
 \examples{
-##---- Should be DIRECTLY executable !! ----
-##-- ==>  Define data, use random,
-##--	or do  help(data=index)  for the standard data sets.
-
-## The function is currently defined as
-function (x, size, m, s) 
-{
-    d0 <- (1 - dlnbinom(0, size, m, s))
-    (x > 0) * dlnbinom(x, size, m, s)/d0
+  dlnbinom.zt(3, 10, 0.5, 2)
+  dlnbinom.zt(0, 10, 0.5, 2) ## 0
   }
-}
-% Add one or more standard keywords, see file 'KEYWORDS' in the
-% R documentation directory.
-\keyword{ ~kwd1 }
-\keyword{ ~kwd2 }% __ONLY ONE__ keyword per line

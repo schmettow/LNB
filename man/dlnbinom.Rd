@@ -34,7 +34,7 @@ The logit-normal distribution is created by imposing a logit-normal prior on the
 \value{
 dlnbinom gives the density, rlnbinom produces random numbers and plnbinom gives the cumulative probability. 
 
-The length of the result is determined by n for rbinom, and is the maximum of the lengths of the numerical parameters for the other functions. The numerical parameters other than n are recycled to the length of the result.
+The length of the result is determined by n for rlnbinom, and is the maximum of the lengths of the numerical parameters for the other functions. The numerical parameters other than n are recycled to the length of the result.
 }
 \references{
 Schmettow, M. (2009). Controlling the usability evaluation process under varying defect visibility. In BCS-HCI ’09: Proceedings of the 23rd British HCI Group Annual Conference on People and Computers: Celebrating People and Technology (pp. 188–197). Swinton, UK: British Computer Society.
@@ -56,6 +56,4 @@ dlngeom
   dlnbinom(3, 10, 0.5, 2)
   rlnbinom(10, 10, 0.5, 2)
   plnbinom(0.5, 10, 0.5, 2)
-  
-\keyword{ ~kwd1 }
-\keyword{ ~kwd2 }% __ONLY ONE__ keyword per line
+}

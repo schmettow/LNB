@@ -2,10 +2,10 @@
 \alias{logist}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{
-%%  ~~function to do ... ~~
+logistic transformation
 }
 \description{
-%%  ~~ A concise (1-5 lines) description of what the function does. ~~
+applies a logistic transformation
 }
 \usage{
 logist(x)
@@ -13,24 +13,20 @@ logist(x)
 %- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{x}{
-%%     ~~Describe \code{x} here~~
+numeric
 }
 }
 \details{
-%%  ~~ If necessary, more details than the description above ~~
+ The logistic transformation is applied, mapping x onto the interval [0;1] with a sigmoid curve. This is the reverse of the logit transformation and the same as the cumulative probability density of the logistic distribution.
 }
 \value{
-%%  ~Describe the value returned
-%%  If it is a LIST, use
-%%  \item{comp1 }{Description of 'comp1'}
-%%  \item{comp2 }{Description of 'comp2'}
-%% ...
+numeric in the interval [0;1]
 }
 \references{
 %% ~put references to the literature/web site here ~
 }
 \author{
-%%  ~~who you are~~
+Martin Schmettow
 }
 \note{
 %%  ~~further notes~~
@@ -39,18 +35,13 @@ logist(x)
 %% ~Make other sections like Warning with \section{Warning }{....} ~
 
 \seealso{
-%% ~~objects to See Also as \code{\link{help}}, ~~~
+\code{\link{logit}}
+\code{\link{plogis}}
 }
 \examples{
-##---- Should be DIRECTLY executable !! ----
-##-- ==>  Define data, use random,
-##--	or do  help(data=index)  for the standard data sets.
-
-## The function is currently defined as
-function (x) 
-1/(1 + exp(-x))
+logist(rnorm(10,0,20))
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
-\keyword{ ~kwd1 }
-\keyword{ ~kwd2 }% __ONLY ONE__ keyword per line
+% \keyword{ ~kwd1 }
+% \keyword{ ~kwd2 }% __ONLY ONE__ keyword per line

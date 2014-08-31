@@ -1,45 +1,46 @@
 \name{dlnbinom}
 \alias{dlnbinom}
-%- Also NEED an '\alias' for EACH other topic documented here.
+\alias{rlnbinom}
+\alias{plnbinom}
 \title{
-%%  ~~function to do ... ~~
+logit-normal binomial distribution
 }
 \description{
-%%  ~~ A concise (1-5 lines) description of what the function does. ~~
+distribution functions (probability, random number generation and cumulative) for the logit-normal binomial distribution
 }
 \usage{
 dlnbinom(x, size, m, s)
+rlnbinom(n, size, m, s)
+dlnbinom(p, size, m, s)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{x}{
-%%     ~~Describe \code{x} here~~
+vector of quantiles
 }
   \item{size}{
-%%     ~~Describe \code{size} here~~
+number of trials (zero or more)
 }
   \item{m}{
-%%     ~~Describe \code{m} here~~
+distribution parameter (central tendency)
 }
   \item{s}{
-%%     ~~Describe \code{s} here~~
+distribution parameter (dispersion)
 }
 }
 \details{
-%%  ~~ If necessary, more details than the description above ~~
+The logit-normal distribution is created by imposing a logit-normal prior on the binomial parameter p.
 }
 \value{
-%%  ~Describe the value returned
-%%  If it is a LIST, use
-%%  \item{comp1 }{Description of 'comp1'}
-%%  \item{comp2 }{Description of 'comp2'}
-%% ...
+dlnbinom gives the density, rlnbinom produces random numbers and plnbinom gives the cumulative probability. 
+
+The length of the result is determined by n for rbinom, and is the maximum of the lengths of the numerical parameters for the other functions. The numerical parameters other than n are recycled to the length of the result.
 }
 \references{
-%% ~put references to the literature/web site here ~
+Schmettow, M. (2009). Controlling the usability evaluation process under varying defect visibility. In BCS-HCI ’09: Proceedings of the 23rd British HCI Group Annual Conference on People and Computers: Celebrating People and Technology (pp. 188–197). Swinton, UK: British Computer Society.
 }
 \author{
-%%  ~~who you are~~
+Martin Schmettow
 }
 \note{
 %%  ~~further notes~~
@@ -48,36 +49,13 @@ dlnbinom(x, size, m, s)
 %% ~Make other sections like Warning with \section{Warning }{....} ~
 
 \seealso{
-%% ~~objects to See Also as \code{\link{help}}, ~~~
+dlnbinom.zt
+dlngeom
 }
 \examples{
-##---- Should be DIRECTLY executable !! ----
-##-- ==>  Define data, use random,
-##--	or do  help(data=index)  for the standard data sets.
-
-## The function is currently defined as
-function (x, size, m, s) 
-{
-    x = as.integer(x)
-    size = as.integer(size)
-    f = function(P, x, size, m, s) (1 - P)^(size - x - 1) * P^(x - 
-        1) * exp(-(logit(P) - m)^2/(2 * s^2))
-    F = function(x, size, m, s) {
-        if (s > 0) 
-            return(integrate(f, 0, 1, x, size, m, s, rel.tol = .Machine$double.eps^0.25, 
-                subdivisions = 100)$value * choose(size, x)/(sqrt(2 * 
-                pi * s^2)))
-        if (s == 0) 
-            return(dbinom(x, size, exp(m)))
-        if (s < 0) 
-            return(0)
-    }
-    tryCatch(mapply(F, x, size, m, s), error = function(cond) {
-        return(dlnbinom.mc(x, size, m, s, nruns = 10000))
-    })
-  }
-}
-% Add one or more standard keywords, see file 'KEYWORDS' in the
-% R documentation directory.
+  dlnbinom(3, 10, 0.5, 2)
+  rlnbinom(10, 10, 0.5, 2)
+  plnbinom(0.5, 10, 0.5, 2)
+  
 \keyword{ ~kwd1 }
 \keyword{ ~kwd2 }% __ONLY ONE__ keyword per line

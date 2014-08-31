@@ -1,20 +1,20 @@
 ## Logit-normal distribution functions ####
-logit <- function(x) log(x/(1-x))
+# logit <- function(x) log(x/(1-x))
 
-dlogitnorm<-function(x,m,s) dnorm(logit(x),m,s)/(x*(1-x));
+# dlogitnorm<-function(x,m,s) dnorm(logit(x),m,s)/(x*(1-x));
+# 
+# rlogitnorm<-function(r,m,s) plogis(rnorm(r,m,s))
 
-rlogitnorm<-function(r,m,s) plogis(rnorm(r,m,s))
+# logist<-function(x) plogis(x) #1/(1+exp(-x))
 
-logist<-function(x) 1/(1+exp(-x))
-
-mean.logitnorm<-function(m,s) integrate(function(x,m,s){dlogitnorm(x,m,s)*x},0,1,m=m,s=s)$value
-
-var.logitnorm<-function(m,s) {
-  mean<-mean.logitnorm(m,s)
-  f<-function(x,m,s){(mean-x)^2*dlogitnorm(x,m,s)}
-  s<-integrate(f,0,1,m=m,s=s)
-  s$value
-}
+# mean.logitnorm<-function(m,s) integrate(function(x,m,s){dlogitnorm(x,m,s)*x},0,1,m=m,s=s)$value
+# 
+# var.logitnorm<-function(m,s) {
+#   mean<-mean.logitnorm(m,s)
+#   f<-function(x,m,s){(mean-x)^2*dlogitnorm(x,m,s)}
+#   s<-integrate(f,0,1,m=m,s=s)
+#   s$value
+# }
 
 ## Logit-normal binomial distribution functions ####
 

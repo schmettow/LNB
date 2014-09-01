@@ -1,0 +1,16 @@
+{
+    "contents" : "\\name{logit}\n\\alias{logit}\n%- Also NEED an '\\alias' for EACH other topic documented here.\n\\title{logit}\n\\description{\nTaking the logarithm of an odds\n}\n\\usage{\nlogit(x)\n}\n%- maybe also 'usage' for other objects documented here.\n\\arguments{\n  \\item{x}{numeric value between 0 and 1}\n}\n\\details{The logit function log(p/(1-p)) is the inverse of the logistic function. It takes a value between 0 and 1 (e.g., a probability) as input and returns a real value. It is often use to map bounded values to real numbers.}\n\\value{numeric}\n\n\\author{\nMartin Schmettow\n}\n\n%% ~Make other sections like Warning with \\section{Warning }{....} ~\n\n\\seealso{\n\\code{\\link{logist}}\n\\code{\\link{logitnorm}}\n\\code{\\link{lnbinom}}\n}\n\\examples{\nlogit(runif(10))\n}\n% Add one or more standard keywords, see file 'KEYWORDS' in the\n% R documentation directory.\n%\\keyword{ ~kwd1 }\n%\\keyword{ ~kwd2 }% __ONLY ONE__ keyword per line\n",
+    "created" : 1409154219618.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "1969932003",
+    "id" : "C57ACF8",
+    "lastKnownWriteTime" : 1409154253,
+    "path" : "C:/Users/martin/Aktenkoffer/Environments/Github/R Packages/LNB/man/logit.Rd",
+    "project_path" : "man/logit.Rd",
+    "properties" : {
+    },
+    "source_on_save" : false,
+    "type" : "r_doc"
+}

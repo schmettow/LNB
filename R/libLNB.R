@@ -48,7 +48,7 @@ var.lnbinom<-function(n,m,s) {
 
 
 plnbinom<-function(x,size,m,s) sum(dlnbinom(c(0:x),size,m,s))
-rlnbinom<-function(r,size,m,s) rbinom(r,size,rlogitnorm(r,m,s))
+rlnbinom<-function(n,size,m,s) rbinom(n,size,rlogitnorm(r,m,s))
 
 ## Zero-runcated LNB ####
 dlnbinom.zt<-function(x,size,m,s){

@@ -32,7 +32,7 @@ The logit-normal distribution is created by imposing a logit-normal prior on the
 dlnbinom.zt gives zero-truncated probability, dlnbinom.zt returns the zero-one trauncated probability
 }
 \references{
-Schmettow, M. (2009). Controlling the usability evaluation process under varying defect visibility. In BCS-HCI ’09: Proceedings of the 23rd British HCI Group Annual Conference on People and Computers: Celebrating People and Technology (pp. 188–197). Swinton, UK: British Computer Society.
+Schmettow, M. (2009). Controlling the usability evaluation process under varying defect visibility. In BCS HCI 09: Proceedings of the 23rd British HCI Group Annual Conference on People and Computers: Celebrating People and Technology (pp. 188-197). Swinton, UK: British Computer Society.
 }
 \author{
 Martin Schmettow
@@ -41,7 +41,6 @@ Martin Schmettow
 %%  ~~further notes~~
 }
 
-%% ~Make other sections like Warning with \section{Warning }{....} ~
 
 \seealso{
 dlnbinom
@@ -49,5 +48,5 @@ dlngeom
 }
 \examples{
   dlnbinom.zt(3, 10, 0.5, 2)
-  dlnbinom.zt(0, 10, 0.5, 2) ## 0
+  dlnbinom.zt(0, 10, 0.5, 2)
   }

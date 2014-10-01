@@ -2,13 +2,10 @@
 \alias{LNB-package}
 \alias{LNB}
 \docType{package}
-\title{
-What the package does (short line)
-~~ package title ~~
+\title{Logit-normal binomial distribution
 }
 \description{
-More about what it does (maybe more than one line)
-~~ A concise (1-5 lines) description of the package ~~
+provides functions to work with the logit-normal binomial distribution and derivates
 }
 \details{
 \tabular{ll}{
@@ -16,27 +13,25 @@ Package: \tab LNB\cr
 Type: \tab Package\cr
 Version: \tab 1.0\cr
 Date: \tab 2014-08-26\cr
-License: \tab What license is it under?\cr
+License: \tab GPL-3\cr
 }
-~~ An overview of how to use the package, including the most important ~~
-~~ functions ~~
+
 }
 \author{
-Who wrote it
+Martin Schmettow
 
-Maintainer: Who to complain to <yourfault@somewhere.net>
-~~ The author and/or maintainer of the package ~~
+Maintainer: Martin Schmettow <schmettow@web.de>
 }
 \references{
-~~ Literature or other references for background information ~~
+Schmettow, M. (2009). Controlling the usability evaluation process under varying defect visibility. In BCS HCI 09: Proceedings of the 23rd British HCI Group Annual Conference on People and Computers: Celebrating People and Technology (pp. 188-197). Swinton, UK: British Computer Society.
 }
-~~ Optionally other standard keywords, one per line, from file KEYWORDS in ~~
-~~ the R documentation directory ~~
+
 \keyword{ package }
 \seealso{
-~~ Optional links to other man pages, e.g. ~~
-~~ \code{\link[<pkg>:<pkg>-package]{<pkg>}} ~~
+
+\code{\link[logitnorm:logitnorm-package]{logitnorm}}
 }
 \examples{
-~~ simple examples of the most important functions ~~
+  dlnbinom(3, 10, 0.5, 2)
+  dlngeom(3, 0.5, 2)
 }

@@ -3,7 +3,9 @@
 
 # dlogitnorm<-function(x,m,s) dnorm(logit(x),m,s)/(x*(1-x));
 # 
-# rlogitnorm<-function(r,m,s) plogis(rnorm(r,m,s))
+
+## rlogitnorm from package logitnorm doesn't have parameter n
+rlogitnorm<-function(n,m,s) plogis(rnorm(n,m,s))
 
 # logist<-function(x) plogis(x) #1/(1+exp(-x))
 
@@ -48,7 +50,7 @@ var.lnbinom<-function(n,m,s) {
 
 
 plnbinom<-function(x,size,m,s) sum(dlnbinom(c(0:x),size,m,s))
-rlnbinom<-function(n,size,m,s) rbinom(n,size,rlogitnorm(r,m,s))
+rlnbinom<-function(n,size,m,s) rbinom(n,size,rlogitnorm(n,m,s))
 
 ## Zero-runcated LNB ####
 dlnbinom.zt<-function(x,size,m,s){
@@ -88,7 +90,7 @@ qlngeom<-function(q,m,s){
 hlngeom<-function(k,m,s) dlngeom(k,m,s)/(1-plngeom(k,m,s))
 hgeom<-function(k,p) dgeom(k,p)/(1-pgeom(k,p))
 
-## Log-likelihood ####
+## Maximum Likelihood estimation ####
 nloglik.lnbinom.zt<-function(p,n,K){ 
   K<-K[K>0]
   if(p[2]>=0){
@@ -101,7 +103,51 @@ nloglik.lnbinom.zt<-function(p,n,K){
   }else{return(-Inf)}
 }
 
-## LNB posterior ####
+fitLNBzt<-function(ms,n,startval=c(-1,2)){
+  ## takes a margin sum data set and the size (number of sessions) and fits by ML
+  ## for extreme sparse or strongly dispersed data, the fit may fail.
+  ## Experiment with the start values (startval) in that case.
+  maxLik<-optim(fn=nloglik.lnbinom.zt, par=startval, 
+                K=ms, n=n, method="BFGS")
+  LNBfit<-list( nlogLik=maxLik$value, mu=maxLik$par[1], sd=maxLik$par[2],
+                n=n, discovered=sum(ms>0), ms=ms)
+  LNBfit$AIC=2*(-LNBfit$nlogLik)+2*2
+  LNBfit <- structure(LNBfit, class = c("LNBfit"))
+  return(LNBfit)
+}
+
+
+print.LNBfit <- function(object) {
+    dhat <- Dhat(object)
+    dnull <- Dnull(object)
+    cat("Observations:\n")
+    print(data.frame(Trials = object$n,
+                   Discovered = object$discovered), 
+          digits = 0,
+          row.names = F)
+    cat("\nCoefficients:\n")
+    print(data.frame(mu = object$mu,
+                   sd = object$sd), 
+          digits = 3,
+          row.names = F)
+  
+    cat("\nProcess:\n")
+    print(data.frame(Completion = dhat,
+                   Unobserved = dnull), 
+          digits = 2,
+          row.names = F)
+    cat("\nnlogLik: ", object$nlogLik, "AIC: ", object$AIC,"\n")
+    cat("\n")
+}
+
+## estimated process completion ####
+Dhat<-function(LNBfit) 1-dlnbinom(0,LNBfit$n,LNBfit$mu, LNBfit$sd)
+
+## number of undiscovered problems ####
+Dnull<- function(LNBfit) LNBfit$discovered/Dhat(LNBfit) - LNBfit$discovered
+
+
+## Bayesian Estimation ####
 
 ## TODO: make prior configurable
 lnbzt_posterior <- function(param, K, MS){

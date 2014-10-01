@@ -2,7 +2,7 @@
 \alias{nloglik.lnbinom.zt}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{
-%%  ~~function to do ... ~~
+negative log-likelihood function of the zero-truncated LNB
 }
 \description{
 %%  ~~ A concise (1-5 lines) description of what the function does. ~~
@@ -53,23 +53,7 @@ nloglik.lnbinom.zt(p, n, K)
 ##--	or do  help(data=index)  for the standard data sets.
 
 ## The function is currently defined as
-function (p, n, K) 
-{
-    K <- K[K > 0]
-    if (p[2] >= 0) {
-        range <- c(c(1:n))
-        frq <- freq(K, range)
-        filter <- frq > 0
-        ml <- log(dlnbinom.zt(range[filter], n, p[1], p[2]))
-        nloglik <- (-sum(ml * frq[filter]))
-        return(nloglik)
-    }
-    else {
-        return(-Inf)
-    }
-  }
+
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
-\keyword{ ~kwd1 }
-\keyword{ ~kwd2 }% __ONLY ONE__ keyword per line

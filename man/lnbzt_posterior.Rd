@@ -2,7 +2,7 @@
 \alias{lnbzt_posterior}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{
-%%  ~~function to do ... ~~
+posterior distribution function for the zero-truncated logit-normal binomial
 }
 \description{
 %%  ~~ A concise (1-5 lines) description of what the function does. ~~
@@ -53,21 +53,7 @@ lnbzt_posterior(param, K, MS)
 ##--	or do  help(data=index)  for the standard data sets.
 
 ## The function is currently defined as
-function (param, K, MS) 
-{
-    if (param[2] >= 0) {
-        occ = unique(MS)
-        frq = freq(MS, occ)
-        ml = log(dlnbinom.zt(occ, K, param[1], param[2]))
-        loglik = sum(ml * frq)
-    }
-    else {
-        loglik = NaN
-    }
-    mprior = dnorm(param[1], mean = -2, sd = 5, log = T)
-    sprior = dunif(param[2], 0, 10, log = T)
-    loglik + mprior + sprior
-  }
+
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.

@@ -2,7 +2,7 @@
 \alias{mean.lnbinom}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{
-%%  ~~function to do ... ~~
+computing the mean of the LNB
 }
 \description{
 %%  ~~ A concise (1-5 lines) description of what the function does. ~~
@@ -48,15 +48,7 @@ mean.lnbinom(n, m, s)
 %% ~~objects to See Also as \code{\link{help}}, ~~~
 }
 \examples{
-##---- Should be DIRECTLY executable !! ----
-##-- ==>  Define data, use random,
-##--	or do  help(data=index)  for the standard data sets.
-
-## The function is currently defined as
-function (n, m, s) 
-sum(dlnbinom(c(0:n), n, m, s) * c(0:n))
+mean.lnbinom(5,0,3)
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
-\keyword{ ~kwd1 }
-\keyword{ ~kwd2 }% __ONLY ONE__ keyword per line

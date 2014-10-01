@@ -37,7 +37,7 @@ dlnbinom gives the density, rlnbinom produces random numbers and plnbinom gives 
 The length of the result is determined by n for rlnbinom, and is the maximum of the lengths of the numerical parameters for the other functions. The numerical parameters other than n are recycled to the length of the result.
 }
 \references{
-Schmettow, M. (2009). Controlling the usability evaluation process under varying defect visibility. In BCS-HCI ’09: Proceedings of the 23rd British HCI Group Annual Conference on People and Computers: Celebrating People and Technology (pp. 188–197). Swinton, UK: British Computer Society.
+Schmettow, M. (2009). Controlling the usability evaluation process under varying defect visibility. In BCS HCI 09: Proceedings of the 23rd British HCI Group Annual Conference on People and Computers: Celebrating People and Technology (pp. 188-197). Swinton, UK: British Computer Society.
 }
 \author{
 Martin Schmettow

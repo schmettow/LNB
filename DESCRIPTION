@@ -1,7 +1,7 @@
 Package: LNB
 Title: (zero- truncated) logit-normal binomial distribution functions
-Version: 1.0
-Date: 2014-08-26
+Version: 1.1
+Date: 2014-10-01
 Author: Martin Schmettow
 Maintainer: Martin Schmettow <schmettow@web.de>
 Description: The logit-normal binomial distribution extends the binomial distribution by a logit-normal prior to account for unobserved variance between draws. A zero-truncated version  applies in situations where  the number of trials becomes known through the process itself, hence items without a single successful trial are unknown to the researcher.  The package further provides functions for the related geometric distribution, as well as a maximum likelihood function.

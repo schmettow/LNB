@@ -1,9 +1,10 @@
-\name{fitLNBzt}
+\name{fitLNB}
+\alias{fitLNB}
 \alias{fitLNBzt}
-\alias{Dhat}
-\alias{Dnull}
+\alias{dhat}
+\alias{dnull}
 \title{
-ML estimation of zero-truncated LNB
+ML estimation of (zero-truncated) LNB
 }
 \description{
 takes a margin sum data set and the size (number of sessions) and fits by ML
@@ -36,14 +37,16 @@ fitLNB
 \item{sd}{}
 \item{n}{}
 \item{discovered}{}
-\item{item.ms}{}
+\item{ms}{}
 \item{nlogLik}{}
 \item{AIC}{}
-
+\item{zt}{}
 }
+
 \references{
 Schmettow, M. (2009). Controlling the usability evaluation process under varying defect visibility. In BCS HCI 09: Proceedings of the 23rd British HCI Group Annual Conference on People and Computers: Celebrating People and Technology (pp. 188-197). Swinton, UK: British Computer Society.
 }
+
 \author{
 Martin Schmettow
 }

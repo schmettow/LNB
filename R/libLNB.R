@@ -103,6 +103,21 @@ nloglik.lnbinom.zt<-function(p,n,K){
   }else{return(-Inf)}
 }
 
+## Maximum Likelihood estimation ####
+nloglik.lnbinom<-function(p,n,K){ 
+  K<-K[K>=0]
+  if(p[2]>=0){
+    range<-c(c(0:n))
+    frq<-freq(K,range)
+    filter<-frq>=0
+    ml<-log(dlnbinom(range[filter],n,p[1],p[2]))
+    nloglik<-(-sum(ml*frq[filter]))
+    return(nloglik)
+  }else{return(-Inf)}
+}
+
+
+
 fitLNBzt<-function(ms,n,startval=c(-1,2)){
   ## takes a margin sum data set and the size (number of sessions) and fits by ML
   ## for extreme sparse or strongly dispersed data, the fit may fail.
@@ -112,14 +127,43 @@ fitLNBzt<-function(ms,n,startval=c(-1,2)){
   LNBfit<-list( nlogLik=maxLik$value, mu=maxLik$par[1], sd=maxLik$par[2],
                 n=n, discovered=sum(ms>0), ms=ms)
   LNBfit$AIC=2*(-LNBfit$nlogLik)+2*2
+  LNBfit$zt = T
   LNBfit <- structure(LNBfit, class = c("LNBfit"))
   return(LNBfit)
 }
 
 
+fitLNB<-function(ms,n,startval=c(-1,2)){
+  ## takes a margin sum data set and the size (number of sessions) and fits by ML
+  ## for extreme sparse or strongly dispersed data, the fit may fail.
+  ## Experiment with the start values (startval) in that case.
+  maxLik<-optim(fn=nloglik.lnbinom, par=startval, 
+                K=ms, n=n, method="BFGS")
+  LNBfit<-list( nlogLik=maxLik$value, mu=maxLik$par[1], sd=maxLik$par[2],
+                n=n, discovered=sum(ms>0), ms=ms)
+  LNBfit$AIC=2*(-LNBfit$nlogLik)+2*2
+  LNBfit$zt = F
+  LNBfit <- structure(LNBfit, class = c("LNBfit"))
+  return(LNBfit)
+}
+
+
+summary.LNBfit<-function(object, bootstrap = F){
+  object$dhat <- dhat(object)
+  object$dnull <- dnull(object)
+  ## if(boostrap) do the booststrap
+  class(object) <- "summary.LNBfit"
+  object
+}
+
+
+coef.LNBfit <- function(object) {
+  out = c(object$mu, object$sd)
+  names(out) = c("mu", "sd")
+  out
+}
+
 print.LNBfit <- function(object) {
-    dhat <- Dhat(object)
-    dnull <- Dnull(object)
     cat("Observations:\n")
     print(data.frame(Trials = object$n,
                    Discovered = object$discovered), 
@@ -128,24 +172,40 @@ print.LNBfit <- function(object) {
     cat("\nCoefficients:\n")
     print(data.frame(mu = object$mu,
                    sd = object$sd), 
-          digits = 3,
-          row.names = F)
-  
-    cat("\nProcess:\n")
-    print(data.frame(Completion = dhat,
-                   Unobserved = dnull), 
           digits = 2,
           row.names = F)
+  
     cat("\nnlogLik: ", object$nlogLik, "AIC: ", object$AIC,"\n")
     cat("\n")
 }
 
+print.summary.LNBfit <- function(object) {
+  print.LNBfit(object)
+  cat("Process:\n")
+  print(data.frame(Completeness = object$dhat,
+                   Undiscovered = object$dnull), 
+        digits = 2,
+        row.names = F)
+}
+
+
+
 ## estimated process completion ####
-Dhat<-function(LNBfit) 1-dlnbinom(0,LNBfit$n,LNBfit$mu, LNBfit$sd)
+dhat <- function(x) UseMethod("dhat",x)
+dnull <- function(x) UseMethod("dnull",x)
+
+dhat.LNBfit <- function(object) ifelse(object$zt,
+                                       1-dlnbinom(0,object$n,object$mu, object$sd), 
+                                       sum(object$ms>0)/length(object$ms))
 
 ## number of undiscovered problems ####
-Dnull<- function(LNBfit) LNBfit$discovered/Dhat(LNBfit) - LNBfit$discovered
+dnull.LNBfit <- function(object) ifelse(object$zt,
+                                        object$discovered/dhat(object) - object$discovered, 
+                                        sum(object$ms==0))
 
+## for backwards compatibility
+Dhat <- dhat.LNBfit
+Dnull <- dnull.LNBfit
 
 ## Bayesian Estimation ####
 

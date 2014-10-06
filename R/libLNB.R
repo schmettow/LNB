@@ -122,7 +122,8 @@ fitLNBzt<-function(ms,n,startval=c(-1,2)){
   ## takes a margin sum data set and the size (number of sessions) and fits by ML
   ## for extreme sparse or strongly dispersed data, the fit may fail.
   ## Experiment with the start values (startval) in that case.
-  maxLik<-optim(fn=nloglik.lnbinom.zt, par=startval, 
+  ms = unlist(ms)
+  maxLik<-optim(fn=nloglik.lnbinom.zt, par=startval,
                 K=ms, n=n, method="BFGS")
   LNBfit<-list( nlogLik=maxLik$value, mu=maxLik$par[1], sd=maxLik$par[2],
                 n=n, discovered=sum(ms>0), ms=ms)
@@ -137,6 +138,7 @@ fitLNB<-function(ms,n,startval=c(-1,2)){
   ## takes a margin sum data set and the size (number of sessions) and fits by ML
   ## for extreme sparse or strongly dispersed data, the fit may fail.
   ## Experiment with the start values (startval) in that case.
+  ms = unlist(ms)
   maxLik<-optim(fn=nloglik.lnbinom, par=startval, 
                 K=ms, n=n, method="BFGS")
   LNBfit<-list( nlogLik=maxLik$value, mu=maxLik$par[1], sd=maxLik$par[2],

@@ -151,6 +151,7 @@ fitLNB<-function(ms,n,startval=c(-1,2)){
 summary.LNBfit<-function(object, bootstrap = F){
   object$dhat <- dhat(object)
   object$dnull <- dnull(object)
+  object$dtotal <- dtotal(object)
   ## if(boostrap) do the booststrap
   class(object) <- "summary.LNBfit"
   object
@@ -183,20 +184,49 @@ print.summary.LNBfit <- function(object) {
   print.LNBfit(object)
   cat("Process:\n")
   print(data.frame(Completeness = object$dhat,
-                   Undiscovered = object$dnull), 
+                   Undiscovered = object$dnull,
+                   Total = object$dtotal), 
         digits = 2,
         row.names = F)
 }
 
+plot.LNBfit <- function(object){
+  object = summary(object)
+  xrange = ifelse(object$zt, 1, 0):object$n
+  Obs = data.frame(Discoveries = xrange, 
+                   Frequency = freq(object$ms, xrange))
+  Fit = data.frame(Discoveries = 0:object$n, 
+                   Frequency = dlnbinom(0:object$n, object$n, object$mu, object$sd) * object$dtotal)
+  ymax = max(Obs$Frequency, object$dnull, Fit$Frequency)
+  
+  out = ggplot(Obs, aes(x = Discoveries, y = Frequency, ymin = 0, ymax = Frequency)) + 
+    geom_point(size = 3) +
+    geom_linerange() +
+    geom_line(data = Fit, aes(x = Discoveries, y = Frequency), 
+              col = "red", size = 1) 
+  if(object$zt) out = out +  geom_point(data = Fit[Fit$Discoveries == 0,],
+                                 aes(x = Discoveries, y = Frequency, ymin = 0, ymax = Frequency), 
+                                 size = 3, col = "red") +
+    geom_linerange(data = Fit[Fit$Discoveries == 0,],
+                   aes(x = Discoveries, ymin = 0, ymax = Frequency), 
+                   linetype = 2,
+                   col = "red")
+  out
+}
 
 
 ## estimated process completion ####
 dhat <- function(x) UseMethod("dhat",x)
 dnull <- function(x) UseMethod("dnull",x)
+dtotal <- function(x) UseMethod("dtotal",x)
 
 dhat.LNBfit <- function(object) ifelse(object$zt,
                                        1-dlnbinom(0,object$n,object$mu, object$sd), 
                                        sum(object$ms>0)/length(object$ms))
+
+dtotal.LNBfit <- function(object) ifelse(object$zt,
+                                       object$discovered / dhat(object), 
+                                       length(object$ms))
 
 ## number of undiscovered problems ####
 dnull.LNBfit <- function(object) ifelse(object$zt,

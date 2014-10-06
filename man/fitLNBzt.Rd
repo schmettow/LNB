@@ -3,6 +3,11 @@
 \alias{fitLNBzt}
 \alias{dhat}
 \alias{dnull}
+\alias{dtotal}
+\alias{print}
+\alias{summary}
+\alias{coef}
+\alias{plot}
 \title{
 ML estimation of (zero-truncated) LNB
 }
@@ -33,14 +38,14 @@ Experiment with the start values (startval) in that case.
 }
 \value{
 fitLNB
-\item{mu}{}
-\item{sd}{}
-\item{n}{}
-\item{discovered}{}
-\item{ms}{}
-\item{nlogLik}{}
-\item{AIC}{}
-\item{zt}{}
+\item{mu}{mean of logitnormal prior}
+\item{sd}{standard deviation of logitnormal prior}
+\item{n}{number of sessions/trials}
+\item{discovered}{number of responses > 0}
+\item{ms}{margin sum}
+\item{nlogLik}{negative log-likelihood}
+\item{AIC}{Akaike Information Criterion}
+\item{zt}{zero-truncated estimation (logical, TRUE with fitLNBzt)}
 }
 
 \references{
@@ -63,6 +68,8 @@ Martin Schmettow
   ms <- ms[ms > 0]
   fit <- fitLNBzt(ms, 15)
   fit
-  D.hat(fit)
-  D.null
+  summary(fit)
+  dhat(fit)
+  dnull(fit)
+  plot(fit)
 }
